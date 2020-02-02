@@ -1,4 +1,4 @@
-package com.example.matchmaker.Activity;
+package com.example.matchmaker.View.Activity.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

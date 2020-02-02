@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appBackGround"
-    tools:context=".Activity.SignInActivity">
+    tools:context=".View.Activity.SignInActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -5,39 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appBackGround"
-    tools:context=".Activity.SignUpActivity">
-
-    <ImageView
-        android:id="@+id/arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:src="@drawable/back"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Sign up,"
-        android:textColor="@color/green"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toEndOf="@+id/arrow"
-        app:layout_constraintTop_toBottomOf="@+id/arrow" />
-
+    tools:context=".View.Activity.Activity.SignUpActivity">
 
     <ScrollView
         android:id="@+id/editInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="4dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,8 +23,33 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
-            <!--<RadioGroup
-                android:id="@+id/typeOfBloodNeed"
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/back"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Sign up,"
+                android:textColor="@color/green"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toEndOf="@+id/arrow"
+                app:layout_constraintTop_toBottomOf="@+id/arrow" />
+
+
+            <RadioGroup
+                android:id="@+id/gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -63,8 +64,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/green"
-                    android:padding="8dp"
-                    android:text="Emergency"
+                    android:checked="true"
+                    android:paddingLeft="80dp"
+                    android:text="Male"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/green" />
 
@@ -73,54 +75,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/green"
-                    android:checked="true"
-                    android:padding="8dp"
-                    android:text="Regular"
+                    android:paddingLeft="60dp"
+                    android:text="Female"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/green" />
 
-            </RadioGroup>-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="200dp"
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Man"
-                    android:layout_gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/black" />
-
-                <Switch
-                    android:id="@+id/switch2"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Weman"
-                    android:layout_gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/black" />
-
-                <Switch
-                    android:id="@+id/switch3"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
+                    android:buttonTint="@color/green"
+                    android:paddingLeft="75dp"
                     android:text="Other"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/green" />
+
+            </RadioGroup>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/black" />
-
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -247,7 +223,7 @@
 
             <Button
                 android:id="@+id/signUpBTN"
-                android:layout_width="250dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
@@ -268,7 +244,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/arrow"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 

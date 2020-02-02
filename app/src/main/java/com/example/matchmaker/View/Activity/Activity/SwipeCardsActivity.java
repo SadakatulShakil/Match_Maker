@@ -1,15 +1,14 @@
-package com.example.matchmaker;
+package com.example.matchmaker.View.Activity.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.lorentzos.flingswipe.FlingCardListener;
+import com.example.matchmaker.R;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
