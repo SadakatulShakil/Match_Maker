@@ -20,6 +20,11 @@ public class User {
         this.userGender = userGender;
     }
 
+    public User(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+
     public User(String userId, String userName, String userEmail, String userDateOfBirth, String userContact, String userGender) {
         this.userId = userId;
         this.userName = userName;

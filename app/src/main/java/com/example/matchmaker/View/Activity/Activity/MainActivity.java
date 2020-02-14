@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.matchmaker.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnSignUp, btnSignIn;
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,13 @@ public class MainActivity extends AppCompatActivity {
 
         btnSignIn = findViewById(R.id.signInPreview);
         btnSignUp = findViewById(R.id.signUpPreview);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            finish();
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+        }
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
