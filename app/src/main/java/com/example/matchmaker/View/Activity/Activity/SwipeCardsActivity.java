@@ -33,6 +33,9 @@ public class SwipeCardsActivity extends AppCompatActivity {
     private String userSex, oppositeUserSex;
     private ListView listView;
     private List<User> rowItems;
+    private String currentUId;
+    private DatabaseReference userDb;
+    private FirebaseAuth mAuth;
 
     SwipeFlingAdapterView flingContainer;
     @Override
@@ -40,6 +43,10 @@ public class SwipeCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_cards);
 
+        mAuth = FirebaseAuth.getInstance();
+        currentUId = mAuth.getCurrentUser().getUid();
+
+        userDb = FirebaseDatabase.getInstance().getReference().child("User");
         checkUserSex();
 
         rowItems = new ArrayList<User>();
@@ -63,12 +70,27 @@ public class SwipeCardsActivity extends AppCompatActivity {
             public void onLeftCardExit(Object dataObject) {
                 //Do something on the left!
                 //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
+                User Object = (User) dataObject;
+                String leftSelectedUserId = Object.getUserId();
+                userDb.child(oppositeUserSex)
+                        .child(leftSelectedUserId)
+                        .child("connections")
+                        .child("NO")
+                        .child(currentUId)
+                        .setValue(true);
                 makeToast(SwipeCardsActivity.this, "Left!");
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
+                User Object = (User) dataObject;
+                String leftSelectedUserId = Object.getUserId();
+                userDb.child(oppositeUserSex)
+                        .child(leftSelectedUserId)
+                        .child("connections")
+                        .child("YES")
+                        .child(currentUId)
+                        .setValue(true);
                 makeToast(SwipeCardsActivity.this, "Right!");
             }
 
@@ -160,7 +182,7 @@ public class SwipeCardsActivity extends AppCompatActivity {
         oppositeUserSexDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if(dataSnapshot.exists()){
+                if(dataSnapshot.exists() && !dataSnapshot.child("connections").child("NO").hasChild(currentUId) && !dataSnapshot.child("connections").child("YES").hasChild(currentUId)){
                     User item = new User(dataSnapshot.getKey(), dataSnapshot.child("userName").getValue().toString());
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
