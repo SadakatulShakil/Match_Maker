@@ -1,16 +1,22 @@
 package com.example.matchmaker.View.Activity.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,28 +32,41 @@ import android.widget.Toast;
 import com.example.matchmaker.R;
 import com.example.matchmaker.View.Activity.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUpActivity extends AppCompatActivity {
     private ImageView backBtn;
     private TextInputEditText nameET, emailET, contactET, passwordET;
     private Button signUpBT;
     private String userGender;
+    private String userId;
     public static final String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     protected static EditText userBirthDate;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private ProgressBar progressBar;
+
+    private static final String TAG = "SignUpActivity";
 
     public SignUpActivity() {
     }
@@ -59,7 +78,6 @@ public class SignUpActivity extends AppCompatActivity {
         final FragmentManager fm = getSupportFragmentManager();
         initView();
         final RadioGroup rbg=(RadioGroup) findViewById(R.id.gender);
-
         userBirthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +108,10 @@ public class SignUpActivity extends AppCompatActivity {
                 beforeSignIn();
             }
         });
+
+
     }
+
 
     private void beforeSignIn() {
 
@@ -155,7 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            String userId = firebaseAuth.getCurrentUser().getUid();
+                            userId = firebaseAuth.getCurrentUser().getUid();
                             User user = new User(userId, nameUser, emailUser, dateOfBirth, contactUser, userGender);
                             DatabaseReference userRef = databaseReference.child("User").child(userGender).child(userId);
                             userRef.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

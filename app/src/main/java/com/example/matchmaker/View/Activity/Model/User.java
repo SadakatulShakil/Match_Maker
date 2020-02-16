@@ -7,9 +7,14 @@ public class User {
     private String userDateOfBirth;
     private String userContact;
     private String userGender;
+    private String userImageUrl;
 
     public User() {
 
+    }
+
+    public User(String userImageUrl) {
+        this.userImageUrl = userImageUrl;
     }
 
     public User(String userName, String userEmail, String userDateOfBirth, String userContact, String userGender) {

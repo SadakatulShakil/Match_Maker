@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,8 @@ public class SwipeCardsActivity extends AppCompatActivity {
     private String currentUId;
     private DatabaseReference userDb;
     private FirebaseAuth mAuth;
+    private String profileImageUrl;
+    private Uri resultUri;
 
     SwipeFlingAdapterView flingContainer;
     @Override
